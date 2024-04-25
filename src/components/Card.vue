@@ -8,7 +8,7 @@ interface Props {
   alt: string
   width: string
   height: string
-  perspective: number
+  perspective?: number
   transformTiming: number
 }
 const props = defineProps<Props>()
