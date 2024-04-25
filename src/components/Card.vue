@@ -9,6 +9,7 @@ interface Props {
   width: string
   height: string
   perspective?: number
+  rotation?: number
   transformTiming: number
 }
 const props = defineProps<Props>()
@@ -16,7 +17,7 @@ const target = ref<VNodeRef | undefined>(undefined)
 const { elementX, elementY, isOutside, elementHeight, elementWidth } = useMouseInElement(target)
 
 const cardTransform = computed(() => {
-  const MAX_ROTATION = 6
+  const MAX_ROTATION = props.rotation ?? 6
 
   const rotateX = (MAX_ROTATION / 2 - (elementY.value / elementHeight.value) * MAX_ROTATION).toFixed(2)
 
