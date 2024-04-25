@@ -9,6 +9,7 @@ interface Props {
   height: string
   perspective?: number
   rotation?: number
+  radius?: number
   transformTiming: number
 }
 const props = defineProps<Props>()
@@ -36,17 +37,20 @@ const cardTransform = computed(() => {
 const widthClass = computed(() => {
   return `${elementWidth.value}px`
 })
-
 const transformClass = computed(() => {
   return `transform ${props.transformTiming}s ease-out`
 })
+const borderRadius = `${props.radius}px`
 </script>
 
 <template>
   <div class="card">
     <div class="card-inner">
       <div class="card-front">
-        <img ref="target" :src :alt :width :height>
+        <div v-if="!props.src">
+          <slot>{{ props.alt }}</slot>
+        </div>
+        <img v-if="props.src" ref="target" :src :alt :width :height>
       </div>
     </div>
   </div>
@@ -56,15 +60,18 @@ const transformClass = computed(() => {
 :root {
   --shadow-color: 286deg 36% 56%;
 }
+
 .card {
   width: v-bind(widthClass);
   transform: v-bind(cardTransform);
   transition: v-bind(transformClass);
+  transform-origin: center;
 }
 
 img {
   --shadow-color: 252deg 3% 27%;
-  box-shadow:  0.4px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+  border-radius: v-bind(borderRadius);
+  box-shadow: 0.4px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
     1.4px 1.7px 2.5px -0.8px hsl(var(--shadow-color) / 0.36),
     3.4px 4.2px 6.1px -1.7px hsl(var(--shadow-color) / 0.36),
     8.3px 10.2px 14.8px -2.5px hsl(var(--shadow-color) / 0.36);
