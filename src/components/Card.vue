@@ -62,6 +62,8 @@ const borderRadius = `${props.radius}px`
 }
 
 .card {
+  margin: 0;
+  padding: 0;
   width: v-bind(widthClass);
   transform: v-bind(cardTransform);
   transition: v-bind(transformClass);
