@@ -1,44 +1,36 @@
 <script setup lang="ts">
-import { useMotion } from '@vueuse/motion'
+import { useMouseInElement } from '@vueuse/core'
 import type { VNodeRef } from 'vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 interface Props {
   src: string
   alt: string
   width: string
   height: string
+  perspective: number
+  transformTiming: number
 }
-defineProps<Props>()
+const props = defineProps<Props>()
 const target = ref<VNodeRef | undefined>(undefined)
-const { variants } = useMotion(target, {
-  initial: {
-    opacity: 0,
-    scale: 0.0,
-    y: 100,
-  },
-  enter: {
-    opacity: 1,
-    scale: 1.0,
-    y: 0,
-  },
+const { elementX, elementY, isOutside, elementHeight, elementWidth } = useMouseInElement(target)
+
+const cardTransform = computed(() => {
+  const MAX_ROTATION = 6
+
+  const rotateX = (MAX_ROTATION / 2 - (elementY.value / elementHeight.value) * MAX_ROTATION).toFixed(2)
+
+  const rotateY = ((elementX.value / elementWidth.value) * MAX_ROTATION - MAX_ROTATION / 2).toFixed(2)
+
+  return isOutside.value ? '' : `perspective(${props.perspective ?? elementWidth.value}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
 })
 </script>
 
 <template>
-  <div
-    ref="target"
-    :initial="variants.initial"
-    :enter="variants.enter"
-  >
+  <div ref="target" class="card">
     <div class="card-inner">
       <div class="card-front">
-        <img
-          :src
-          :alt
-          :width
-          :height
-        >
+        <img :src :alt :width :height>
       </div>
     </div>
   </div>
@@ -46,17 +38,7 @@ const { variants } = useMotion(target, {
 
 <style scoped>
 .card {
-	perspective: 1000px;
-}
-
-.card-inner {
-	display: grid;
-	transition: transform 0.8s;
-	transform-style: preserve-3d;
-}
-
-/* Position the front and back side */
-.card-front {
-	grid-area: 1/1;
+  transform: v-bind(cardTransform);
+  transition: 'transform v-bind(transformTiming)s ease-out';
 }
 </style>

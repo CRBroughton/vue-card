@@ -1,8 +1,8 @@
 {
   "name": "3d-card",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -11,7 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@vueuse/motion": "^2.1.0",
+    "@vueuse/core": "^10.9.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
