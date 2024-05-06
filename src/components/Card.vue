@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMouseInElement } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 interface Props {
   src: string
@@ -41,19 +41,10 @@ const transformClass = computed(() => {
   return `transform ${props.transformTiming}s ease-out`
 })
 const borderRadius = `${props.radius}px`
-
-function mouseMoveEvent() {
-  target.value!.style.setProperty('--x', String(elementX.value))
-  target.value!.style.setProperty('--y', String(elementY.value))
-}
-
-onMounted(() => {
-  target.value?.addEventListener('mousemove', mouseMoveEvent)
-})
 </script>
 
 <template>
-  <div class="card shiny" @mousemove="mouseMoveEvent">
+  <div class="card">
     <div class="card-inner">
       <div class="card-front">
         <div v-if="!props.src">
@@ -86,25 +77,5 @@ img {
     1.4px 1.7px 2.5px -0.8px hsl(var(--shadow-color) / 0.36),
     3.4px 4.2px 6.1px -1.7px hsl(var(--shadow-color) / 0.36),
     8.3px 10.2px 14.8px -2.5px hsl(var(--shadow-color) / 0.36);
-}
-.shiny {
-  cursor: pointer;
-}
-
-.shiny::after {
-  content: "";
-  position: absolute;
-  top: calc(var(--y, v-bind(elementY)) * 1px - 25%);
-  left: calc(var(--x, v-bind(elementX)) * 1px - 25%);
-  width: 50%;
-  height: 50%;
-  background: radial-gradient(white, #3984ff00 80%);
-
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.shiny:hover::after {
-  opacity: 0.1;
 }
 </style>
