@@ -10,7 +10,8 @@ interface Props {
   perspective?: number
   rotation?: number
   radius?: number
-  transformTiming: number
+  scale?: number
+  transformTiming?: number
 }
 const props = defineProps<Props>()
 const target = ref<HTMLImageElement | undefined>(undefined)
@@ -35,12 +36,14 @@ const cardTransform = computed(() => {
 })
 
 const widthClass = computed(() => {
-  return `${elementWidth.value}px`
+  return `${props.width}px`
 })
 const transformClass = computed(() => {
-  return `transform ${props.transformTiming}s ease-out`
+  return `transform ${props.transformTiming ?? 0.15}s ease-out`
 })
 const borderRadius = `${props.radius}px`
+
+const scaleClass = `${props.scale ?? 100}%`
 </script>
 
 <template>
@@ -68,6 +71,7 @@ const borderRadius = `${props.radius}px`
   transform: v-bind(cardTransform);
   transition: v-bind(transformClass);
   transform-origin: center;
+  scale: v-bind(scaleClass);
 }
 
 img {

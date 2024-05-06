@@ -5,24 +5,16 @@ import Card from './components/Card.vue'
 <template>
   <div class="container">
     <Card
-      src="https://cloud.appwrite.io/v1/cards/cloud?mock=normal"
+      src="https://placehold.co/600x600"
       alt="The front of the Card"
-      width="450"
-      height="274"
-      :perspective="1000"
-      :rotation="25"
-      :radius="14"
-      :transform-timing="0.15"
+      width="600"
+      height="600"
     />
     <Card
-      src="https://cloud.appwrite.io/v1/cards/cloud?mock=normal"
+      src="https://placehold.co/600x500"
       alt="The front of the Card"
-      width="450"
-      height="274"
-      :perspective="1000"
-      :rotation="25"
-      :radius="14"
-      :transform-timing="0.15"
+      width="600"
+      height="500"
     />
   </div>
 </template>
@@ -43,5 +35,7 @@ import Card from './components/Card.vue'
 
 .container {
   display: flex;
+  gap: 1em;
+  width: 100%
 }
 </style>

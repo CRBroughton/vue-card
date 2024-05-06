@@ -12,10 +12,10 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    src: 'https://cloud.appwrite.io/v1/cards/cloud?mock=normal',
+    src: 'https://placehold.co/400x250',
     alt: 'The front of the Card',
-    width: '450',
-    height: '274',
+    width: '400',
+    height: '250',
     transformTiming: 0.15,
     perspective: 1000,
     rotation: 25,
