@@ -22,3 +22,30 @@ export const Primary: Story = {
     radius: 14,
   },
 }
+
+export const VerticalCard: Story = {
+  args: {
+    src: 'https://placehold.co/250x400',
+    alt: 'The front of the Card',
+    width: '250',
+    height: '400',
+    transformTiming: 0.15,
+    perspective: 1000,
+    rotation: 25,
+    radius: 14,
+  },
+}
+
+export const LargeCard: Story = {
+  args: {
+    src: 'https://placehold.co/900x500',
+    alt: 'The front of the Card',
+    width: '900',
+    height: '500',
+    transformTiming: 0.15,
+    perspective: 1000,
+    rotation: 25,
+    radius: 14,
+  },
+}
+
